@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AkiliDex — Property Listings</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    </head>
+    <body>
+
+        <nav class="nav">
+            <div class="logo">
+                <a href="project.html"> AkiliDex </a>
+            </div>
+            <div class="nav-links">
+                <a href="project.html">Home</a>
+                <a href="project.html">Projects</a>
+                <a href="project.html">Contact</a>
+                <a href="project.html">About</a>
+            </div>
+        </nav>
+        <div class="info">
+            <h1>Explore Our Property Listings</h1>
+            <p>Find your dream home from our curated selection of
+                properties.</p>
+        </div>
+
+        <div class="project-container">
+            <h1>Property Listings</h1>
+        </div>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="villa 66.avif" alt="Property 1">
+                <h2>Modern Apartment</h2>
+                <p class="location">Location: Downtown</p>
+                <p class="price">Price: $250,000</p>
+                <button class="view-details">View Details</button>
+
+            </div>
+            <div class="project-card">
+                <img src="villa11.avif" alt="Property 2">
+                <h2>Luxury Villa</h2>
+                <p class="location">Location: Suburbs</p>
+                <p class="price">Price: $750,000</p>
+                <button class="view-details">View Details</button>
+            </div>
+            <div class="project-card">
+                <img src="villa22.avif" alt="Property 3">
+                <h2>Cozy Cottage</h2>
+                <p class="location">Location: Countryside</p>
+                <p class="price">Price: $150,000</p>
+                <button class="view-details">View Details</button>
+            </div>
+            <div class="project-card">
+                <img src="villa33.avif" alt="Property 4">
+                <h2>Beachfront Condo</h2>
+                <p class="location">Location: Seaside</p>
+                <p class="price">Price: $500,000</p>
+                <button class="view-details">View Details</button>
+            </div>
+            <div class="project-card">
+                <img src="villa44.avif" alt="Property 5">
+                <h2>Modern Apartment</h2>
+                <p class="location">Location: Downtown</p>
+                <p class="price">Price: $250,000</p>
+                <button class="view-details">View Details</button>
+            </div>
+            <div class="project-card">
+                <img src="villa55.avif" alt="Property 6">
+                <h2>Luxury Villa</h2>
+                <p class="location">Location: Suburbs</p>
+                <p class="price">Price: $750,000</p>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="footer-logo">
+                <p>&copy; 2024 AkiliDex. All rights reserved.</p>
+                <p><a href="mailto:info@akilidex.com">Contact us at
+                        info@akilidex.com</a></p>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://web.facebook.com/itsjustjal"
+                    aria-label="Facebook"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="https://x.com/its_justkal" aria-label="Twitter"><i
+                        class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/_itsjustkal_/"
+                    aria-label="Instagram"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me/Its_Just_Kal" aria-label="Telegram"><i
+                        class="fa-brands fa-telegram"></i></a>
+            </div>
+            <div class="contact-info">
+                <p>Follow us on social media!</p>
+                <p>Tel: 0202514045</p>
+            </div>
+
+        </footer>
+
+        <div class="overlay" id="overlay"></div>
+
+        <aside class="details-drawer" id="detailsDrawer">
+            <button class="drawer-close" id="drawerClose"
+                aria-label="Close">&times;</button>
+
+            <img id="drawerImg" src alt>
+
+            <label>Name
+                <input type="text" id="drawerName">
+            </label>
+
+            <label>Location
+                <input type="text" id="drawerLocation">
+            </label>
+
+            <label>Price
+                <input type="text" id="drawerPrice">
+            </label>
+
+            <div class="drawer-actions">
+                <button id="drawerFavorite" class="fav-toggle">♡ Add to
+                    favorites</button>
+                <button id="drawerSave" class="save-btn">Save changes</button>
+            </div>
+        </aside>
+
+        <script>
+            const overlay = document.getElementById('overlay');
+const drawer = document.getElementById('detailsDrawer');
+const drawerClose = document.getElementById('drawerClose');
+const drawerImg = document.getElementById('drawerImg');
+const drawerName = document.getElementById('drawerName');
+const drawerLocation = document.getElementById('drawerLocation');
+const drawerPrice = document.getElementById('drawerPrice');
+const drawerSave = document.getElementById('drawerSave');
+const drawerFavorite = document.getElementById('drawerFavorite');
+
+let activeCard = null; // the card currently being edited
+
+// Open drawer when any "View Details" button is clicked
+document.querySelectorAll('.view-details').forEach(btn => {
+    btn.addEventListener('click', () => {
+        activeCard = btn.closest('.project-card');
+
+        drawerImg.src = activeCard.querySelector('img').src;
+        drawerName.value = activeCard.querySelector('h2').textContent;
+        drawerLocation.value = activeCard.querySelector('.location').textContent.replace('Location: ', '');
+        drawerPrice.value = activeCard.querySelector('.price').textContent.replace('Price: ', '');
+
+        const isFav = activeCard.classList.contains('favorited');
+        drawerFavorite.classList.toggle('active', isFav);
+        drawerFavorite.textContent = isFav ? '♥ Favorited' : '♡ Add to favorites';
+
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+    });
+});
+
+function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    activeCard = null;
+}
+drawerClose.addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+
+// Save edits back onto the card
+drawerSave.addEventListener('click', () => {
+    if (!activeCard) return;
+    activeCard.querySelector('h2').textContent = drawerName.value;
+    activeCard.querySelector('.location').textContent = 'Location: ' + drawerLocation.value;
+    activeCard.querySelector('.price').textContent = 'Price: ' + drawerPrice.value;
+    closeDrawer();
+});
+
+// Toggle favorite
+drawerFavorite.addEventListener('click', () => {
+    if (!activeCard) return;
+    activeCard.classList.toggle('favorited');
+    const isFav = activeCard.classList.contains('favorited');
+    drawerFavorite.classList.toggle('active', isFav);
+    drawerFavorite.textContent = isFav ? '♥ Favorited' : '♡ Add to favorites';
+});
+        </script>
+    </body>
+</html>
